@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} Q&A App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/file_form.css') }}">
+</head>
+<body>
+    <nav>
+        <h2>Question&Answer Application</h2>
+    </nav>
+    <div class="container mt-5">
+        <div class="file-form">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="file-label" for="question">Choose File: </label>
+                        <div>
+                            {{ file_upload_form.hidden_tag()}}
+                        </div>
+                        <div>
+                            {{ file_upload_form.file() }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" style="display: flex; justify-content: end;">
+                        <div>
+                            {{ file_upload_form.submit() }}
+                        </div>
+                    </div>
+                </div>
+            </form>    
+        </div>
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
