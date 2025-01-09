@@ -1,4 +1,3 @@
-from openai import OpenAI
 from transformers import pipeline
 import PyPDF2
 from flask import Flask, render_template, request, jsonify, redirect
@@ -31,10 +30,6 @@ def index():
         file_content = extract_text_from_pdf_file(file_path)
         app.config["PDF_CONTENT"] = file_content
         # request.environ['PDF_TEXT'] = file_content
-
-        print("file name: " + filename)
-        print("content: " + file_content)
-        print("environ1: " + str(request.environ.get("PDF_TEXT", None)))
         
         return redirect('/form', 302)
     return render_template('file_form.html', file_upload_form=file_upload_form)
@@ -57,7 +52,7 @@ def index_page():
     return render_template('qa_form.html', question_form=question_form)
 
 
-# # function helps to extract text from pdf 
+# function helps to extract text from pdf 
 def extract_text_from_pdf_file(file_path) -> str:
     text = ""
     with open(file_path, 'rb') as file:
@@ -65,23 +60,6 @@ def extract_text_from_pdf_file(file_path) -> str:
         for page in reader.pages:
             text = "".join(page.extract_text())
     return text
-
-# pdf_content = extract_text_from_pdf_file("./file/qa_pdf.pdf")
-# print(pdf_content)
-
-
-
-# text = """
-#     this text includes information about supersport cars. the best car is ferrari and the second is ford.
-# """
-
-# question = str(input("question: "))
-# result = qa_pipeline({
-#     'context': text,
-#     'question': question # 'what is the best car?'
-# })
-
-# print(result)
 
 
 if __name__ == "__main__":

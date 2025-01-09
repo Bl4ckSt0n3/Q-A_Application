@@ -2,3 +2,5 @@ Flask
 PyPDF2
 openai
 transformers
+WTForms
+Flask-WTF
